@@ -64,6 +64,7 @@ public class Manager_s1 {
         float score;
         for (int i = 0; i < n; i++) {
             System.out.println("Input student number #" + (i + 1) + "/" + n);
+            System.out.println("");
             System.out.print("Input id: ");
             id = bf.readLine().trim();
             System.out.print("Input name:");
@@ -75,6 +76,7 @@ public class Manager_s1 {
     }
 
     void output(ArrayList<student> st, int n) {
+        System.out.println("\n\t\t\tThe student list");
         for (int i = 0; i < st.size(); i++) {
             System.out.println(st.get(i).toString());
         }
@@ -88,7 +90,7 @@ public class Manager_s1 {
             @Override
             public void find_ID() {
                 String ID = null;
-                System.out.print("Input id you want to find :");
+                System.out.print("\nInput id you want to find :");
                 try {
                     ID = bf.readLine().trim();
                 } catch (IOException ex) {
@@ -105,7 +107,7 @@ public class Manager_s1 {
             @Override
             public void find_Ascore() {
                 float score = 0;
-                System.out.print("Input Ascore you want to find :");
+                System.out.print("\nInput Ascore you want to find :");
                 try {
                     score = Float.parseFloat(bf.readLine().trim());
                 } catch (IOException ex) {
@@ -134,6 +136,7 @@ public class Manager_s1 {
         Ano1 obj = new Ano1() {
             @Override
             public void sort_ID() {
+                System.out.println("The student list after sorting by id");
                 Collections.sort(st, new Comparator<student>() {
                     @Override
                     public int compare(student t, student t1) {
@@ -144,18 +147,30 @@ public class Manager_s1 {
 
             @Override
             public void sort_Ascore() {
+                System.out.println("The student list after sorting by name and ascore");
                 Collections.sort(st, new Comparator<student>() {
 
                     @Override
                     public int compare(student t, student t1) {
-                        if ((t1.Ascore < t.Ascore)) {
-                            return -1;
-                        } else if (t1.Ascore > t.Ascore) {
+                        student st1 = (student) t;
+                        student st2 = (student) t1;
+                        int d = t.getName().compareToIgnoreCase(t1.getName());
+                        if (d > 0) {
                             return 1;
-                        } else {
-                            return 0;
                         }
+
+                        if (d == 0) {
+                            if ((t1.Ascore < t.Ascore)) {
+                                return 1;
+                            } else if (t1.Ascore > t.Ascore) {
+                                return -1;
+                            }
+                            else
+                                return 0;
+                        }
+                        return -1;
                     }
+//                        
 
                 });
             }
